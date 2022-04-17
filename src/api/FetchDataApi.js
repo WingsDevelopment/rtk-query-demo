@@ -26,6 +26,7 @@ export const fruitApi = createApi({
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
+          //not supported yet
           data.map((fruit) => {
             dispatch(
               fruitApi.util.updateQueryData("getById", fruit.id, (draft) => {
@@ -83,6 +84,7 @@ export const fruitApi = createApi({
           },
         };
       },
+      //THIS WORKS!
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         const optimisticUpdate = dispatch(
           fruitApi.util.updateQueryData("getTotalCount", undefined, (draft) => {
@@ -114,6 +116,7 @@ export const fruitApi = createApi({
           },
         };
       },
+      //THIS DOESN'T WORK!
       async onQueryStarted(request, { dispatch, queryFulfilled }) {
         console.log(request); //request is correct
         const id = request.id;
