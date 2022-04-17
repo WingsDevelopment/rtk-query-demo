@@ -26,9 +26,6 @@ export const fruitApi = createApi({
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
-          //lost few hours trying to figure out why this is not working
-          //because it's not throwing any error/or worning and library actually doesn't support this yet,
-          //also they are aware of this issue and are working on it, but not throwing any error/warning
           data.map((fruit) => {
             dispatch(
               fruitApi.util.updateQueryData("getById", fruit.id, (draft) => {
@@ -99,8 +96,6 @@ export const fruitApi = createApi({
           console.log(e);
         }
       },
-      // Invalidates all Post-type queries providing the `LIST` id - after all, depending of the sort order,
-      // that newly created post could show up in any lists.
       invalidatesTags: [
         { type: "Fruits", id: "LIST" },
         { type: "Fruits", id: "TOTAL-COUNT" },
